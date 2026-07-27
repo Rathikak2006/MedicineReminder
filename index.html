@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Reminder App</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>💊 Medicine Reminder App</h1>
+        <p class="subtitle">Never miss your medicine again!</p>
+
+        <div class="form">
+            <label>Medicine Name</label>
+            <input
+                type="text"
+                id="medicineName"
+                placeholder="Enter medicine name"
+            >
+
+            <label>Reminder Time</label>
+            <input
+                type="time"
+                id="medicineTime"
+            >
+
+            <button id="addReminder">
+                Add Reminder
+            </button>
+        </div>
+
+        <h2>Your Reminders</h2>
+
+        <ul id="reminderList">
+        </ul>
+    </div>
+
+    <!-- Popup -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <h2>⏰ Medicine Reminder</h2>
+
+            <p id="popupMedicine"></p>
+
+            <button id="stopAlarm">
+                OK
+            </button>
+        </div>
+    </div>
+
+    <!-- Alarm Sound -->
+    <audio id="alarmSound" loop>
+        <source src="Sound/alarm.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
