@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up - Medicine Reminder</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+
+            background-image:
+                linear-gradient(
+                    rgba(255, 255, 255, 0.25),
+                    rgba(255, 255, 255, 0.25)
+                ),
+                url("background.jpg");
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-repeat: no-repeat;
+        }
+
+
+        .signup-container {
+
+            width: 500px;
+
+            padding: 30px;
+
+            border: 3px solid black;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            background-color: rgba(255, 255, 255, 0.92);
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+
+        h1 {
+
+            color: rgb(25, 25, 127);
+
+            margin-bottom: 25px;
+        }
+
+
+        form {
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            background-color: rgba(240, 240, 255, 0.8);
+        }
+
+
+        label {
+
+            display: block;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            color: rgb(165, 13, 16);
+
+            margin-top: 12px;
+
+            margin-bottom: 7px;
+        }
+
+
+        input {
+
+            width: 85%;
+
+            padding: 11px;
+
+            border: 2px solid rgb(25, 25, 127);
+
+            border-radius: 7px;
+
+            font-size: 16px;
+        }
+
+
+        input:focus {
+
+            outline: none;
+
+            border-color: rgb(165, 13, 16);
+        }
+
+
+        button {
+
+            margin-top: 20px;
+
+            padding: 11px 30px;
+
+            background-color: yellow;
+
+            color: rgb(170, 37, 37);
+
+            border: 2px solid rgb(170, 37, 37);
+
+            border-radius: 7px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        button:hover {
+
+            background-color: orange;
+        }
+
+
+        .login-text {
+
+            margin-top: 25px;
+
+            color: #333;
+        }
+
+
+        .login-button {
+
+            display: inline-block;
+
+            margin-top: 10px;
+
+            padding: 9px 25px;
+
+            background-color: rgb(25, 25, 127);
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+        }
+
+
+        .login-button:hover {
+
+            background-color: rgb(45, 45, 170);
+        }
+
+
+        #signupMessage {
+
+            font-weight: bold;
+
+            margin-top: 15px;
+        }
+
+
+        @media (max-width: 600px) {
+
+            .signup-container {
+
+                width: 90%;
+
+                padding: 20px;
+            }
+
+            input {
+
+                width: 95%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="signup-container">
+
+
+        <h1>
+            📝 <u>Create Account</u>
+        </h1>
+
+
+        <form id="signupForm">
+
+
+            <label for="signupName">
+                Username / Name
+            </label>
+
+
+            <input
+                type="text"
+                id="signupName"
+                placeholder="Enter your name"
+                required
+            >
+
+
+            <label for="signupEmail">
+                Email
+            </label>
+
+
+            <input
+                type="email"
+                id="signupEmail"
+                placeholder="Enter your email"
+                required
+            >
+
+
+            <label for="signupPassword">
+                Password
+            </label>
+
+
+            <input
+                type="password"
+                id="signupPassword"
+                placeholder="Create password"
+                required
+            >
+
+
+            <label for="confirmPassword">
+                Confirm Password
+            </label>
+
+
+            <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm password"
+                required
+            >
+
+
+            <br>
+
+
+            <button type="submit">
+                Sign Up
+            </button>
+
+
+            <p id="signupMessage"></p>
+
+
+            <div class="login-text">
+
+                Already have an account?
+
+                <br>
+
+                <a
+                    href="./plogin.html"
+                    class="login-button"
+                >
+                    Login
+                </a>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+
+
+    <script>
+
+
+        const signupForm =
+            document.getElementById("signupForm");
+
+
+        const signupMessage =
+            document.getElementById("signupMessage");
+
+
+        signupForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const name =
+                    document
+                        .getElementById("signupName")
+                        .value
+                        .trim();
+
+
+                const email =
+                    document
+                        .getElementById("signupEmail")
+                        .value
+                        .trim()
+                        .toLowerCase();
+
+
+                const password =
+                    document
+                        .getElementById("signupPassword")
+                        .value;
+
+
+                const confirmPassword =
+                    document
+                        .getElementById("confirmPassword")
+                        .value;
+
+
+                /*
+                    Check fields
+                */
+
+                if (
+                    !name ||
+                    !email ||
+                    !password ||
+                    !confirmPassword
+                ) {
+
+                    signupMessage.textContent =
+                        "Please fill in all fields.";
+
+                    signupMessage.style.color = "red";
+
+                    return;
+                }
+
+
+                /*
+                    Check password length
+                */
+
+                if (password.length < 6) {
+
+                    signupMessage.textContent =
+                        "Password must contain at least 6 characters.";
+
+                    signupMessage.style.color = "red";
+
+                    return;
+                }
+
+
+                /*
+                    Check password confirmation
+                */
+
+                if (password !== confirmPassword) {
+
+                    signupMessage.textContent =
+                        "Passwords do not match.";
+
+                    signupMessage.style.color = "red";
+
+                    return;
+                }
+
+
+                /*
+                    Check existing account
+                */
+
+                const existingAccount =
+                    JSON.parse(
+                        localStorage.getItem("userAccount")
+                    );
+
+
+                if (existingAccount) {
+
+                    if (
+                        existingAccount.email.toLowerCase()
+                        ===
+                        email
+                    ) {
+
+                        signupMessage.textContent =
+                            "An account with this email already exists.";
+
+                        signupMessage.style.color = "red";
+
+                        return;
+
+                    }
+
+
+                    if (
+                        existingAccount.name.toLowerCase()
+                        ===
+                        name.toLowerCase()
+                    ) {
+
+                        signupMessage.textContent =
+                            "This username already exists.";
+
+                        signupMessage.style.color = "red";
+
+                        return;
+
+                    }
+
+                }
+
+
+                /*
+                    Create account
+                */
+
+                const userAccount = {
+
+                    name: name,
+
+                    email: email,
+
+                    password: password
+
+                };
+
+
+                localStorage.setItem(
+                    "userAccount",
+                    JSON.stringify(userAccount)
+                );
+
+
+                signupMessage.textContent =
+                    "Account created successfully!";
+
+                signupMessage.style.color = "green";
+
+
+                /*
+                    Clear fields
+                */
+
+                document.getElementById(
+                    "signupName"
+                ).value = "";
+
+
+                document.getElementById(
+                    "signupEmail"
+                ).value = "";
+
+
+                document.getElementById(
+                    "signupPassword"
+                ).value = "";
+
+
+                document.getElementById(
+                    "confirmPassword"
+                ).value = "";
+
+
+                /*
+                    Go to login
+                */
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "plogin.html";
+
+                }, 1000);
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

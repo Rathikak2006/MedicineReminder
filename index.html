@@ -1,63 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Medicine Reminder App</title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
+
 <body>
 
+
+    <!-- LOGIN PROTECTION -->
+
+    <script>
+
+        if (
+            localStorage.getItem("loggedIn") !== "true"
+        ) {
+
+            window.location.href = "plogin.html";
+
+        }
+
+    </script>
+
+
+
+    <!-- ================= MEDICINE APP ================= -->
+
     <div class="container">
-        <h1>💊 Medicine Reminder App</h1>
-        <p class="subtitle">Never miss your medicine again!</p>
+
+
+        <div class="top-bar">
+
+            <div>
+
+                <h1>
+                    💊 Medicine Reminder App
+                </h1>
+
+                <p class="subtitle">
+                    Never miss your medicine again!
+                </p>
+
+            </div>
+
+
+            <button
+                id="logoutButton"
+                class="logout-button"
+            >
+                Logout
+            </button>
+
+        </div>
+
+
+        <h3 id="welcomeUser"></h3>
+
 
         <div class="form">
-            <label>Medicine Name</label>
+
+
+            <label for="medicineName">
+                Medicine Name
+            </label>
+
+
             <input
                 type="text"
                 id="medicineName"
                 placeholder="Enter medicine name"
             >
 
-            <label>Reminder Time</label>
+
+            <label for="medicineTime">
+                Reminder Time
+            </label>
+
+
             <input
                 type="time"
                 id="medicineTime"
             >
 
+
             <button id="addReminder">
                 Add Reminder
             </button>
+
+
         </div>
 
-        <h2>Your Reminders</h2>
+
+        <h2>
+            Your Reminders
+        </h2>
+
 
         <ul id="reminderList">
         </ul>
+
+
     </div>
 
-    <!-- Popup -->
-    <div id="popup" class="popup">
+
+
+    <!-- ================= POPUP ================= -->
+
+    <div
+        id="popup"
+        class="popup"
+    >
+
         <div class="popup-content">
-            <h2>⏰ Medicine Reminder</h2>
+
+
+            <h2>
+                ⏰ Medicine Reminder
+            </h2>
+
 
             <p id="popupMedicine"></p>
+
 
             <button id="stopAlarm">
                 OK
             </button>
+
+
         </div>
+
     </div>
 
-    <!-- Alarm Sound -->
-    <audio id="alarmSound" loop>
-        <source src="Sound/alarm.mp3" type="audio/mpeg">
+
+
+    <!-- ================= ALARM SOUND ================= -->
+
+    <audio
+        id="alarmSound"
+        loop
+    >
+
+        <source
+            src="Sound/alarm.mp3"
+            type="audio/mpeg"
+        >
+
         Your browser does not support audio.
+
     </audio>
+
+
 
     <script src="script.js"></script>
 
+
 </body>
+
 </html>

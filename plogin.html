@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login - Medicine Reminder</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+
+            background-image:
+                linear-gradient(
+                    rgba(255, 255, 255, 0.25),
+                    rgba(255, 255, 255, 0.25)
+                ),
+                url("background.jpg");
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-repeat: no-repeat;
+        }
+
+
+        .login-container {
+
+            width: 500px;
+
+            padding: 30px;
+
+            border: 3px solid black;
+
+            border-radius: 15px;
+
+            text-align: center;
+
+            background-color: rgba(255, 255, 255, 0.92);
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+
+        h1 {
+
+            color: rgb(25, 25, 127);
+
+            margin-bottom: 25px;
+        }
+
+
+        form {
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+            background-color: rgba(240, 240, 255, 0.8);
+        }
+
+
+        label {
+
+            display: block;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            color: rgb(165, 13, 16);
+
+            margin-top: 15px;
+
+            margin-bottom: 7px;
+        }
+
+
+        input {
+
+            width: 85%;
+
+            padding: 12px;
+
+            border: 2px solid rgb(25, 25, 127);
+
+            border-radius: 7px;
+
+            font-size: 16px;
+        }
+
+
+        input:focus {
+
+            outline: none;
+
+            border-color: rgb(165, 13, 16);
+        }
+
+
+        button {
+
+            margin-top: 20px;
+
+            padding: 11px 35px;
+
+            background-color: yellow;
+
+            color: rgb(170, 37, 37);
+
+            border: 2px solid rgb(170, 37, 37);
+
+            border-radius: 7px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        button:hover {
+
+            background-color: orange;
+        }
+
+
+        .signup-text {
+
+            margin-top: 25px;
+
+            color: #333;
+
+            font-size: 16px;
+        }
+
+
+        .signup-button {
+
+            display: inline-block;
+
+            margin-top: 10px;
+
+            padding: 9px 25px;
+
+            background-color: rgb(25, 25, 127);
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 7px;
+
+            font-weight: bold;
+        }
+
+
+        .signup-button:hover {
+
+            background-color: rgb(45, 45, 170);
+        }
+
+
+        #loginMessage {
+
+            font-weight: bold;
+
+            margin-top: 15px;
+
+            min-height: 20px;
+        }
+
+
+        @media (max-width: 600px) {
+
+            .login-container {
+
+                width: 90%;
+
+                padding: 20px;
+            }
+
+
+            input {
+
+                width: 95%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="login-container">
+
+        <h1>
+            💊 <u>Login</u>
+        </h1>
+
+
+        <form id="loginForm">
+
+            <label for="loginUsername">
+                Username / Email
+            </label>
+
+
+            <input
+                type="text"
+                id="loginUsername"
+                placeholder="Enter username or email"
+                autocomplete="username"
+                required
+            >
+
+
+            <label for="loginPassword">
+                Password
+            </label>
+
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter password"
+                autocomplete="current-password"
+                required
+            >
+
+
+            <button type="submit">
+                Login
+            </button>
+
+
+            <p id="loginMessage"></p>
+
+
+            <div class="signup-text">
+
+                Don't have an account?
+
+                <br>
+
+                <a
+                    href="psignin.html"
+                    class="signup-button"
+                >
+                    Sign Up
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <script>
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+        const loginMessage =
+            document.getElementById("loginMessage");
+
+
+        // ==========================================
+        // CHECK IF ALREADY LOGGED IN
+        // ==========================================
+
+        if (
+            localStorage.getItem("loggedIn") === "true"
+        ) {
+
+            window.location.href = "index.html";
+
+        }
+
+
+        // ==========================================
+        // LOGIN
+        // ==========================================
+
+        loginForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const username =
+                    document
+                        .getElementById("loginUsername")
+                        .value
+                        .trim();
+
+
+                const password =
+                    document
+                        .getElementById("loginPassword")
+                        .value;
+
+
+                // Get saved account
+
+                let userAccount = null;
+
+
+                try {
+
+                    userAccount =
+                        JSON.parse(
+                            localStorage.getItem("userAccount")
+                        );
+
+                } catch (error) {
+
+                    console.error(
+                        "Account data error:",
+                        error
+                    );
+
+                }
+
+
+                // ==================================
+                // NO ACCOUNT
+                // ==================================
+
+                if (!userAccount) {
+
+                    loginMessage.textContent =
+                        "No account found. Please Sign Up first.";
+
+                    loginMessage.style.color = "red";
+
+                    return;
+
+                }
+
+
+                // ==================================
+                // CHECK USERNAME / EMAIL
+                // ==================================
+
+                const enteredUsername =
+                    username.toLowerCase();
+
+
+                const savedName =
+                    String(
+                        userAccount.name
+                    ).toLowerCase();
+
+
+                const savedEmail =
+                    String(
+                        userAccount.email
+                    ).toLowerCase();
+
+
+                const usernameCorrect =
+                    enteredUsername === savedName ||
+                    enteredUsername === savedEmail;
+
+
+                // ==================================
+                // CHECK PASSWORD
+                // ==================================
+
+                const passwordCorrect =
+                    password ===
+                    userAccount.password;
+
+
+                // ==================================
+                // LOGIN SUCCESS
+                // ==================================
+
+                if (
+                    usernameCorrect &&
+                    passwordCorrect
+                ) {
+
+                    localStorage.setItem(
+                        "loggedIn",
+                        "true"
+                    );
+
+
+                    localStorage.setItem(
+                        "userName",
+                        userAccount.name
+                    );
+
+
+                    localStorage.setItem(
+                        "userEmail",
+                        userAccount.email
+                    );
+
+
+                    loginMessage.textContent =
+                        "Login successful! Opening app...";
+
+                    loginMessage.style.color =
+                        "green";
+
+
+                    setTimeout(
+                        function() {
+
+                            window.location.href =
+                                "index.html";
+
+                        },
+                        500
+                    );
+
+
+                } else {
+
+                    loginMessage.textContent =
+                        "Invalid username/email or password.";
+
+                    loginMessage.style.color =
+                        "red";
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
