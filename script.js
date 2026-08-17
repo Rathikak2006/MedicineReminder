@@ -565,7 +565,7 @@ logoutButton.addEventListener(
 
 
         window.location.href =
-            "login.html";
+            "plogin.html";
 
     }
 );
@@ -586,4 +586,3 @@ setInterval(
     checkReminders,
     1000
 );
-    
